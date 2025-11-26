@@ -1,9 +1,13 @@
+# Ignore all node_modules
 node_modules/
-dist/
-build/
+
+# Client specific
+client/node_modules/
+client/.env
+
+# Server specific
+server/node_modules/
+server/.env
+
+# Logs
 *.log
-.env
-.env.local
-.DS_Store
-.vscode/
-.idea/

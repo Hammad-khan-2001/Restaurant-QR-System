@@ -17,13 +17,43 @@ const userSchema = new mongoose.Schema(
       required: true
     },
 
+    phone: {
+      type: Number,
+    },
+
     isActive: {
       type: Boolean,
       default: true
     },
 
+    totalSpend: {
+      type: Number,
+    },
+
+    totalOrders: {
+      type: Number,
+    },
+
+    role: {
+      type:String,
+      enum: [customer, admin],
+      default: 'customer'
+    },
+
+    loyaltyPoints: {
+      type: Number,
+    },
+ 
     refreshToken: {
       type: String
+    },
+
+    refreshTokenExpiresTime:{
+      type: Date,
+    },
+
+     lastLogin: {
+      type: Date,
     }
   },
   { timestamps: true }
