@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 text-2xl font-bold">
+          <div className="shrink-0 text-2xl font-bold">
             Qrovia
           </div>
 
@@ -72,7 +72,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/cart"
-            className="block px-6 py-4 flex items-center justify-center gap-2 text-xl font-semibold hover:bg-[#A67856] hover:text-[#7C4A2F] transition w-full"
+            className=" px-6 py-4 flex items-center justify-center gap-2 text-xl font-semibold hover:bg-[#A67856] hover:text-[#7C4A2F] transition w-full"
             onClick={() => setOpen(false)}
           >
             <FiShoppingCart className="text-2xl" /> Cart
