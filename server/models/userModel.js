@@ -1,62 +1,52 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true
-    },
-
-    email: {
-      type: String,
-      required: true
-    },
-
-    password: {
-      type: String,
-      required: true
-    },
-
-    phone: {
-      type: Number,
-    },
-
-    isActive: {
-      type: Boolean,
-      default: true
-    },
-
-    totalSpend: {
-      type: Number,
-    },
-
-    totalOrders: {
-      type: Number,
-    },
-
-    role: {
-      type:String,
-      enum: [customer, admin],
-      default: 'customer'
-    },
-
-    loyaltyPoints: {
-      type: Number,
-    },
- 
-    refreshToken: {
-      type: String
-    },
-
-    refreshTokenExpiresTime:{
-      type: Date,
-    },
-
-     lastLogin: {
-      type: Date,
-    }
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
   },
-  { timestamps: true }
-);
+  email: {
+    type: String,
+  },
+  phone : {
+    type : Number 
+  },
+  passwordHash: {
+    type: String,
+  },
+  accountTypes : {
+    type : String ,
+    enum : ['REGISTERED' , 'GUEST'],
+    default : "REGISTERED"
+  },
+  role : {
+    type : String ,
+    enum : ['customer' , 'admin'],
+    default : 'customer'
+  },
+  isActive: {
+    type: Boolean,
+  },
+  totalSpend : {
+    type : Number
+  },
+  totalOrders : {
+    type : Number
+  },
+  loyaltyPoints : {
+    type : Number 
+  },
+  refreshToken: {
+    type: String,
+  },
+  refreshTokenExpiresTime : {
+    type : Date
+  },
+  lastlogin : {
+    type : Date,
+    default : Date.now()
+  }
+});
 
-export default mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
+
+export default User;
