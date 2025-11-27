@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 text-2xl font-bold">
-            ScanDine
+            Qrovia
           </div>
 
           {/* Desktop Menu */}
