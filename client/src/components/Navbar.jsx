@@ -8,12 +8,12 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="relative z-50 bg-[#7C4A2F] text-white shadow-md">
+    <nav className="relative z-50 bg-[#3A0519] text-white shadow-md">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="shrink-0 text-2xl font-bold">
-            Qrovia
+          <div className="shrink-0 text-3xl text-amber-100 font-bold first-letter:text-amber-500">
+            ScanBite
           </div>
 
           {/* Desktop Menu */}
@@ -30,14 +30,14 @@ const Navbar = () => {
             >
               <FiShoppingCart /> Cart
             </Link>
-            <Link to="/login" className="hover:text-[#D9B08C] transition">
-              Login
+            <Link to="/contact" className="hover:text-[#D9B08C] transition">
+              Contact
             </Link>
             <Link
-              to="/contact"
-              className="bg-[#A67856] hover:bg-[#D9B08C] px-4 py-2 rounded transition"
+              to="/login"
+              className="bg-amber-500 text-black hover:bg-[#c77e3f] active:scale-95 px-7 py-2 rounded-md transition"
             >
-              Contact
+              Login
             </Link>
           </div>
 
@@ -78,18 +78,18 @@ const Navbar = () => {
             <FiShoppingCart className="text-2xl" /> Cart
           </Link>
           <Link
-            to="/login"
+            to="/contact"
             className="block px-6 py-4 text-xl font-semibold hover:bg-[#A67856] hover:text-[#7C4A2F] transition w-full text-center"
             onClick={() => setOpen(false)}
           >
-            Login
+            Contact
           </Link>
           <Link
-            to="/contact"
+            to="/login"
             className=" block px-6 py-4 text-xl font-semibold hover:bg-[#A67856] hover:text-[#7C4A2F] transition w-full text-center"
             onClick={() => setOpen(false)}
           >
-            Contact
+            Login
           </Link>
         </div>
       )}
