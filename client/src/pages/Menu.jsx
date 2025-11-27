@@ -1,6 +1,6 @@
 // Menu.jsx
 import React from "react";
-import DishCard from "../components/DishCard";
+import DishCard from "../components/Dishcard";
 
 const dishes = [
   { id: 1, name: "Paneer Butter Masala", price: 250, img: "https://source.unsplash.com/300x200/?paneer" },
