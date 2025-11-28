@@ -2,14 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./configs/db.js";
-import authRoutes from "./routes/auth.routes.js"
+import authRoutes from "./routes/auth.routes.js";
 
-dotenv.config();   // ← Load .env ONLY here
+dotenv.config();
+await connectDB();
 
 const app = express();
 app.use(express.json());
 
-await connectDB();
 
 app.use(cors({
   origin: "https://restaurant-qr-system-alpha.vercel.app",
@@ -19,11 +19,14 @@ app.use(cors({
 }));
 
 
+app.get("/", (req, res) => {
+  res.send("API is Working");
+});
 
-app.get('/', (req, res) => res.send("API is Working"));
+app.use("/api", authRoutes);
 
-app.use('/api', authRoutes)
+const PORT = process.env.PORT ;
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

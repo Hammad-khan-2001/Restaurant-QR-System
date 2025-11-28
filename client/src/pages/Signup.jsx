@@ -14,8 +14,6 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Signup Successful!");
-    // navigate("/login");
     dispatch(registerUser({ name, email, password, phone }));
   };
 
