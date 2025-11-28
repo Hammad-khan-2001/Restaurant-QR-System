@@ -16,9 +16,8 @@ app.use(cors({
   credentials: true,
 }));
 
-// app.use('/', (req, res) => {
-//   res.send('This is home page');
-// })
+
+app.get('/', (req, res) => res.send("API is Working"));
 
 app.use('/api', authRoutes)
 
