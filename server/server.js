@@ -12,7 +12,10 @@ app.use(express.json());
 connectDB();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+      "http://localhost:5173",
+      "https://restaurant-qr-system-alpha.vercel.app/"
+    ],
   credentials: true,
 }));
 
