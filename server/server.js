@@ -14,7 +14,10 @@ connectDB();
 app.use(cors({
   origin: "https://restaurant-qr-system-alpha.vercel.app",
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
 
 
 app.get('/', (req, res) => res.send("API is Working"));
