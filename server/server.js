@@ -9,7 +9,7 @@ dotenv.config();   // ← Load .env ONLY here
 const app = express();
 app.use(express.json());
 
-connectDB();
+await connectDB();
 
 app.use(cors({
   origin: "https://restaurant-qr-system-alpha.vercel.app",
