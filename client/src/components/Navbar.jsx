@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FiShoppingCart } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/authSlice";
+import { logout } from "../Redux/authSlice";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
