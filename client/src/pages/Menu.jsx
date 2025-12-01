@@ -52,9 +52,9 @@ export default function Menu() {
   }, []);
 
   return (
-    <div className="bg-[#F5EDE3] min-h-screen p-4">
+    <div className="bg-linear-to-b from-black via-[#000000] to-[#070000] min-h-screen p-4">
       <div className="mx-auto lg:max-w-7xl md:max-w-4xl sm:max-w-xl max-sm:max-w-sm">
-        <h2 className="text-3xl font-bold italic text-[#3E2723] mb-8 pl-2">
+        <h2 className="text-3xl font-bold italic text-[#fde9e9] mb-8 pl-2">
           Our Premium Menu
         </h2>
 

@@ -5,17 +5,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#7C4A2F",     // Dark Brown
-        secondary: "#A67856",   // Light Brown
-        accent: "#D9B08C",      // Warm Highlight
-        bg: "#F5EFE6",          // Page Background
-        card: "#FFF8F0",        // Card Background
-        textDark: "#4B382A",    // Headings
-        textLight: "#7D5A3C",   // Body
+        darkred: "#8B0000",
+        deepred: "#5A0000",
+        gold: "#D4AF37",
+        soft: "#E5E5E5",
       },
       fontFamily: {
-        heading: ["Poppins", "sans-serif"],
-        body: ["Roboto", "sans-serif"],
+        heading: ["Playfair Display", "serif"],
+        body: ["Poppins", "sans-serif"],
       },
     },
   },
