@@ -16,25 +16,28 @@ app.use(cors({
   credentials: true,
 }));
 
-const start = async () => {
-  try {
-    await connectDB();
-    console.log("DB connected");
-  } catch (error) {
-    console.log("DB connection error:", error.message);
-  }
-};
-start();
+// const start = async () => {
+//   try {
+//     await connectDB();
+//     console.log("DB connected");
+//   } catch (error) {
+//     console.log("DB connection error:", error.message);
+//   }
+// };
+// start();
+
+await connectDB();
 
 app.get("/", (req, res) => {
   res.send("API is Working");
 });
 
-// Test route
+
+// Test DB
 app.get("/test-db", async (req, res) => {
   try {
-    const collections = await mongoose.connection.db.collections();
-    res.json({ success: true, collections: collections.length });
+    const state = mongoose.connection.readyState;
+    res.json({ success: true, state }); // should be 1
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
