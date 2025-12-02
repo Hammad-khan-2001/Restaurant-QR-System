@@ -1,11 +1,20 @@
 import mongoose from "mongoose";
 
-export const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("✔ MongoDB Connected Successfully");
-  } catch (error) {
-    console.log("❌ MongoDB Connection Failed:", error.message);
-    process.exit(1);
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+export async function connectDB() {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(process.env.MONGO_URI, {
+      dbName: "restaurant", // optional if already in URI
+    }).then((mongoose) => mongoose);
   }
-};
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
