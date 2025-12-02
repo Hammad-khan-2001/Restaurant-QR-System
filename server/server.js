@@ -17,17 +17,16 @@ app.use(cors({
   credentials: true,
 }));
 
-// const start = async () => {
-//   try {
-//     await connectDB();
-//     console.log("DB connected");
-//   } catch (error) {
-//     console.log("DB connection error:", error.message);
-//   }
-// };
-// start();
+const start = async () => {
+  try {
+    await connectDB();
+    console.log("DB connected");
+  } catch (error) {
+    console.log("DB connection error:", error.message);
+  }
+};
+start();
 
-await connectDB();
 
 app.get("/", (req, res) => {
   res.send("API is Working");
