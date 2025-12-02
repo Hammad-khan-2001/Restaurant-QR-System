@@ -12,7 +12,7 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://restaurant-qr-system-alpha.vercel.app/login"],
   credentials: true,
 }));
 
@@ -29,4 +29,4 @@ const PORT = process.env.PORT ;
 //   console.log(`Server running on port ${PORT}`);
 // });
 
-module.exports = app;
+export default app;
