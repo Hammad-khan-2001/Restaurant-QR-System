@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../Redux/authSlice";   // ✅ sir wala action
+import { login } from "../Redux/authSlice";  
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function Login() {
     password: "",
   });
 
-  // ✅ Sir ka handleChange
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -35,7 +35,7 @@ export default function Login() {
       console.log("Login success:", res);
 
       // ✅ LocalStorage me bhi save karwa do
-      localStorage.setItem("token", res.token);
+      localStorage.setItem("token", res.accessToken);
 
       navigate("/home");
     } catch (err) {
