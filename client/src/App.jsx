@@ -25,6 +25,16 @@ const App = () => {
         />
 
         <Route
+          path="/home"
+          element={
+            //required accessToken to get this page
+            <ProtectRoutes>
+              <Home />
+            </ProtectRoutes>
+          }
+        />
+
+        <Route
           path="/menu"
           element={
             <ProtectRoutes>
