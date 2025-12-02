@@ -30,6 +30,16 @@ app.get("/", (req, res) => {
   res.send("API is Working");
 });
 
+// Test route
+app.get("/test-db", async (req, res) => {
+  try {
+    const collections = await mongoose.connection.db.collections();
+    res.json({ success: true, collections: collections.length });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 app.use("/api/v1/auth", authRoutes);
 
 // const PORT = process.env.PORT;
