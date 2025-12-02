@@ -39,7 +39,7 @@ export default function Login() {
       // ✅ LocalStorage me bhi save karwa do
       localStorage.setItem("token", res.token);
 
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       console.log("Login failed", err);
     }
