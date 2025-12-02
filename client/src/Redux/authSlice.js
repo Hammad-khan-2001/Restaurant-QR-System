@@ -9,7 +9,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkApi) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/auth/login",
+        `${import.meta.env.VITE_API_URL}/api/v1/auth/login`,
         { email, password }
       );
       
@@ -27,7 +27,7 @@ export const register = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/auth/register",
+        `${import.meta.env.VITE_API_URL}/api/v1/auth/login`,
         data
       );
       return res.data;
