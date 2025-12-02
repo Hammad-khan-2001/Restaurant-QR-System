@@ -5,7 +5,6 @@ import { connectDB } from "./configs/db.js";
 import authRoutes from "./routes/auth.routes.js";
 
 dotenv.config();
-await connectDB();
 
 const app = express();
 app.use(express.json());
@@ -16,6 +15,15 @@ app.use(cors({
   credentials: true,
 }));
 
+const start = async () => {
+  try {
+    await connectDB();
+    console.log("DB connected");
+  } catch (error) {
+    console.log("DB connection error:", error.message);
+  }
+};
+start();
 
 app.get("/", (req, res) => {
   res.send("API is Working");
@@ -23,7 +31,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRoutes);
 
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`);
