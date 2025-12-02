@@ -33,16 +33,6 @@ app.get("/", (req, res) => {
 });
 
 
-// Test DB
-app.get("/test-db", async (req, res) => {
-  try {
-    const state = mongoose.connection.readyState;
-    res.json({ success: true, state }); // should be 1
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
-
 app.use("/api/v1/auth", authRoutes);
 
 // const PORT = process.env.PORT;
