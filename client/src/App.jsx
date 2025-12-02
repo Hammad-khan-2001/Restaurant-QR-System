@@ -18,9 +18,9 @@ const App = () => {
           path="/"
           element={
             //required accessToken to get this page
-            <ProtectRoutes>
+            <OpenRoutes>
               <Home />
-            </ProtectRoutes>
+            </OpenRoutes>
           }
         />
 
