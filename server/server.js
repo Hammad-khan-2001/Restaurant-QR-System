@@ -9,9 +9,10 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+const allowedOrigins = ["http://localhost:5173", "https://restaurant-qr-system-alpha.vercel.app"];
 
 app.use(cors({
-  origin: ["http://localhost:5173", "https://restaurant-qr-system-alpha.vercel.app"],
+  origin: allowedOrigins,
   credentials: true,
 }));
 
@@ -31,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRoutes);
 
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`);

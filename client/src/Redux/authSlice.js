@@ -6,11 +6,11 @@ import axios from "axios";
 // =======================
 export const login = createAsyncThunk(
   "auth/login",
-  async ({ email, password }, thunkApi) => {
+  async (data, thunkApi) => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/auth/login`,
-        { email, password }
+        data
       );
       
       return res.data; 
