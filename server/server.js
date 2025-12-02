@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./configs/db.js";
 import authRoutes from "./routes/auth.routes.js";
-import mongoose from "mongoose";
 
 dotenv.config();
 
