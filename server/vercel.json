@@ -8,18 +8,20 @@
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" } 
+      "config": {
+        "distDir": "dist",
+        "framework": "vite"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "^/api/(.*)$",
       "dest": "/server.js"
     },
     {
-      "src": "/(.*)",
+      "src": "^/(.*)$",
       "dest": "/client/dist/index.html"
     }
   ]
 }
-
