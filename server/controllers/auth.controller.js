@@ -45,7 +45,7 @@ export const login = async (req, res) => {
         message: `There is no account with ${email} , Please create an account and try again`,
       });
     }
-    const isPasswordMatch = await bcrypt.compare(password, user.passwordHash);
+    const isPasswordMatch =  bcrypt.compare(password, user.passwordHash);
     //  console.log(isPasswordMatch)
      if (!isPasswordMatch) {
        return res.status(400).json({
