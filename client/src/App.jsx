@@ -7,7 +7,8 @@ import ProtectRoutes from './components/ProtectRoutes';
 import OpenRoutes from './components/OpenRoutes';
 import Menu from './pages/Menu';
 import Cart from './pages/Cart';
-import Contact from './components/Contact'
+import Contact from './pages/Contact'
+import About from './pages/About'
 
 
 const App = () => {
@@ -30,6 +31,16 @@ const App = () => {
             //required accessToken to get this page
             <ProtectRoutes>
               <Home />
+            </ProtectRoutes>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            //required accessToken to get this page
+            <ProtectRoutes>
+              <About />
             </ProtectRoutes>
           }
         />
