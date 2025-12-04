@@ -1,5 +1,6 @@
 import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
+import bcrypt from "bcryptjs";
 import { generateAccessToken , generateRefreshToken } from '../utils/jwt.js';
 
 export const register = async (req, res) => {
@@ -45,7 +46,7 @@ export const login = async (req, res) => {
         message: `There is no account with ${email} , Please create an account and try again`,
       });
     }
-    const isPasswordMatch =  bcrypt.compare(password, user.passwordHash);
+    const isPasswordMatch = await bcrypt.compare(password, user.passwordHash);
     //  console.log(isPasswordMatch)
      if (!isPasswordMatch) {
        return res.status(400).json({
