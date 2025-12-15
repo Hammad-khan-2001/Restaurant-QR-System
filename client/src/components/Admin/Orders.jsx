@@ -384,12 +384,14 @@ const statusColors = {
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const safeOrders = Array.isArray(orders) ? orders : [];
 
   // ================= FETCH ORDERS =================
   const fetchOrders = async () => {
     try {
       const res = await axios.get("/api/v1/orders");
-      setOrders(res.data || []);
+      // setOrders(res.data || []);
+      setOrders(Array.isArray(res.data?.data) ? res.data.data : []);
     } catch (err) {
       console.error("Fetch Orders Error:", err);
       setOrders([]);
@@ -432,7 +434,7 @@ const Orders = () => {
 
   // ================= DAILY SUMMARY =================
   const today = new Date().toDateString();
-  const todaysCompletedOrders = orders.filter(
+  const todaysCompletedOrders = safeOrders.filter(
     (o) =>
       o.status === "completed" &&
       new Date(o.createdAt).toDateString() === today
@@ -447,7 +449,7 @@ const Orders = () => {
     todayOrdersCount > 0 ? todayRevenue / todayOrdersCount : 0;
 
   // ================= HISTORY ORDERS GROUPED BY DATE =================
-  const historyOrders = orders.filter(
+  const historyOrders = safeOrders.filter(
     (o) => o.status === "completed" || o.status === "cancelled"
   );
 
@@ -490,12 +492,12 @@ const Orders = () => {
 
       {/* ================= LIVE ORDERS ================= */}
       <h1 className="text-3xl font-bold text-yellow-400 mb-6">Live Orders</h1>
-      {orders.filter((o) => o.status !== "completed" && o.status !== "cancelled")
+      {safeOrders.filter((o) => o.status !== "completed" && o.status !== "cancelled")
         .length === 0 ? (
         <p className="text-white/50 text-center py-12">No live orders</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {orders
+          {safeOrders
             .filter((o) => o.status !== "completed" && o.status !== "cancelled")
             .map((order) => (
               <Card
@@ -519,7 +521,7 @@ const Orders = () => {
                   <div className="mb-3">
                     <h3 className="text-white font-semibold mb-1">Items:</h3>
                     <ul className="list-disc list-inside text-white/80 text-sm">
-                      {order.items.map((item) => (
+                      {(order.items || []).map((item) => (
                         <li key={item.id}>
                           {item.name} x {item.quantity} - ₹
                           {(item.price * item.quantity).toFixed(2)}
@@ -592,7 +594,7 @@ const Orders = () => {
                       <div className="mb-3">
                         <h3 className="text-white font-semibold mb-1">Items:</h3>
                         <ul className="list-disc list-inside text-white/80 text-sm">
-                          {order.items.map((item) => (
+                          {(order.items || []).map((item) => (
                             <li key={item.id}>
                               {item.name} x {item.quantity} - ₹
                               {(item.price * item.quantity).toFixed(2)}
