@@ -7,6 +7,8 @@ import Table from "../models/table.js";
 
 export const placeOrder = async (req, res) => {
     try {
+        console.log("User:", req.user); // 🔥 check if user exists
+        console.log("Payload:", req.body); // 🔥 check incoming payload
         const { tableNumber, tableId, items } = req.body;
 
 
@@ -226,7 +228,7 @@ export const markOrderPaid = async (req, res) => {
 
 export const getUserOrders = async (req, res) => {
     try {
-        const userId = req.user.id; // verifyToken middleware should set req.user
+        const userId = req.user._id; 
         const orders = await Order.find({ user: userId }).sort({ createdAt: -1 });
         res.status(200).json({ data: orders });
     } catch (err) {
