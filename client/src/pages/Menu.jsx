@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DishCard from "../components/DishCard";
+import DishCard from "../components/Dishcard";
 import Loader from "../components/Loader";
 
 export default function Menu() {
