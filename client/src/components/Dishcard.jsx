@@ -1,24 +1,80 @@
-// DishCard.jsx (Brown Theme)
+// import React from "react";
+
+// export default function Dishcard({ dish }) {
+
+//   return (
+//     <div className="relative rounded-2xl overflow-hidden shadow-lg transform transition hover:scale-105 bg-[#080500]">
+//       {/* Dish Image covers entire card */}
+//       <img
+//         src={dish.image}
+//         alt={dish.name}
+//         className="w-full h-56 object-cover"
+//       />
+
+//       {/* Light brown overlay effect */}
+//       <div className="absolute inset-0 bg-linear-to-t from-[#2e1300] via-[#2e1300]/20 to-transparent"></div>
+
+//       {/* Content */}
+//       <div className="absolute bottom-0 w-full p-4">
+//         <h3 className="text-white font-bold text-lg">{dish.name}</h3>
+//         <p className="text-[#f1b975] font-semibold text-sm">₹{dish.price}</p>
+
+//         <button
+//           className="mt-2 w-full active:scale-95 hover:cursor-pointer  bg-[#b48c06] text-black py-2 rounded-lg hover:bg-[#dfb21d] font-semibold"
+//         >
+//           Add to Cart
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart as addCart } from "../Redux/cartSlice";
 
 export default function DishCard({ dish }) {
-  return (
-    <div className="relative rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition transform bg-[#3d0d04]">
-      <img
-        src={dish.img}
-        alt={dish.name}
-        className="w-full h-56 object-cover opacity-90"
-      />
-{/* [#3E272390]  */}
-      <div className="absolute bottom-0 w-full bg-linear-to-t from-[#140202] via-70% p-5">
-        <h3 className="text-white/95 font-bold text-lg">{dish.name}</h3>
-        <p className="text-[#ffc782] font-semibold">₹{dish.price}</p>
+  const dispatch = useDispatch();
 
-        <button className="mt-2 w-full bg-[#3a0404] text-white py-2 rounded-lg hover:bg-[#7a0e37] hover:text-white/90 transition font-medium">
+  const handleAddToCart = () => {
+    dispatch(
+      addCart({
+        id: dish._id || dish.id,
+        name: dish.name,
+        price: dish.price,
+        image: dish.image,
+      })
+    );
+  };
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden shadow-lg transform transition hover:scale-105">
+      {/* Full image */}
+      <img
+        src={dish.image}
+        alt={dish.name}
+        className="w-full h-56 object-cover"
+      />
+
+      {/* Light overlay */}
+      <div className="absolute inset-0 bg-linear-to-t from-[#3b1800]/30 to-transparent"></div>
+
+      {/* Content */}
+      <div className="absolute bottom-0 w-full p-4">
+        <h3 className="text-white font-bold text-lg">{dish.name}</h3>
+        <p className="text-[#f1b975] font-semibold text-sm">₹{dish.price}</p>
+
+        <button
+          onClick={handleAddToCart}
+          className="mt-2 w-full active:scale-95 hover:cursor-pointer bg-[#aa6900] text-black py-2 rounded-lg hover:bg-[#be811f] font-semibold"
+        >
           Add to Cart
         </button>
       </div>
     </div>
   );
 }
-
