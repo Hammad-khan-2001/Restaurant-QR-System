@@ -28,7 +28,7 @@ const router = express.Router();
 // router.put("/:id/mark-paid",markOrderPaid);
 // router.get("/user", verifyToken, getUserOrders);
 
-router.post("/place", verifyToken, placeOrder);
+router.post("/place", placeOrder);
 
 router.get("/user", verifyToken, getUserOrders); 
 

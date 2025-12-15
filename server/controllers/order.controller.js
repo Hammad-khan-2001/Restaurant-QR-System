@@ -7,8 +7,7 @@ import Table from "../models/table.js";
 
 export const placeOrder = async (req, res) => {
     try {
-        console.log("User:", req.user); // 🔥 check if user exists
-        console.log("Payload:", req.body); // 🔥 check incoming payload
+      
         const { tableNumber, tableId, items } = req.body;
 
 
@@ -22,7 +21,6 @@ export const placeOrder = async (req, res) => {
         );
 
         const newOrder = await Order.create({
-            user: req.user._id,
             tableNumber,
             tableId,
             items,
