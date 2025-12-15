@@ -391,7 +391,7 @@ const Orders = () => {
     try {
       const res = await axios.get("/api/v1/orders");
       // setOrders(res.data || []);
-      setOrders(Array.isArray(res.data?.data) ? res.data.data : []);
+      setOrders(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Fetch Orders Error:", err);
       setOrders([]);
@@ -515,7 +515,7 @@ const Orders = () => {
                     </span>
                   </p>
                   <p className="mb-2 text-white font-semibold">
-                    Total: ₹{order.totalAmount.toFixed(2)}
+                    Total: ₹{Number(order.totalAmount || 0).toFixed(2)}
                   </p>
 
                   <div className="mb-3">
@@ -524,7 +524,7 @@ const Orders = () => {
                       {(order.items || []).map((item) => (
                         <li key={item.id}>
                           {item.name} x {item.quantity} - ₹
-                          {(item.price * item.quantity).toFixed(2)}
+                          {((Number(item.price) || 0) * (Number(item.quantity) || 0)).toFixed(2)}
                         </li>
                       ))}
                     </ul>
@@ -588,7 +588,7 @@ const Orders = () => {
                         </span>
                       </p>
                       <p className="mb-2 text-white font-semibold">
-                        Total: ₹{order.totalAmount.toFixed(2)}
+                        Total: ₹{Number(order.totalAmount || 0).toFixed(2)}
                       </p>
 
                       <div className="mb-3">
@@ -597,7 +597,7 @@ const Orders = () => {
                           {(order.items || []).map((item) => (
                             <li key={item.id}>
                               {item.name} x {item.quantity} - ₹
-                              {(item.price * item.quantity).toFixed(2)}
+                              {((Number(item.price) || 0) * (Number(item.quantity) || 0)).toFixed(2)}
                             </li>
                           ))}
                         </ul>
