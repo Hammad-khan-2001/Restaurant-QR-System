@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
@@ -88,6 +88,56 @@ const Cart = () => {
 
 
 
+  // const handlePlaceOrder = async () => {
+  //   try {
+  //     // ✅ TABLE INFO FROM LOCAL STORAGE (QR SE AAYA)
+  //     const activeTable = JSON.parse(localStorage.getItem("activeTable"));
+
+  //     if (!activeTable) {
+  //       alert("Please scan table QR first");
+  //       return;
+  //     }
+
+  //     // ✅ PAYLOAD
+  //     const payload = {
+  //       tableNumber: activeTable.tableNumber,
+  //       tableId: activeTable.tableId,
+  //       items: cartItems
+  //     };
+
+  //     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/orders/place`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(payload)
+  //     });
+
+  //     // ❗ safety check
+  //     if (!res.ok) {
+  //       const text = await res.text();
+  //       console.error("Server error:", text);
+  //       alert("Order failed");
+  //       return;
+  //     }
+
+  //     const data = await res.json();
+
+  //     console.log("ORDER RESPONSE:", data);
+  //     alert("Order placed successfully");
+
+  //     dispatch(clearCart());
+
+  //     localStorage.setItem("activeOrderId", data.order._id);
+
+  //     navigate("/track-order");
+
+  //   } catch (error) {
+  //     console.error("Place Order Error:", error);
+  //   }
+  // };
+
+
   const handlePlaceOrder = async () => {
     try {
       // ✅ TABLE INFO FROM LOCAL STORAGE (QR SE AAYA)
@@ -98,42 +148,58 @@ const Cart = () => {
         return;
       }
 
+      if (!cartItems || cartItems.length === 0) {
+        alert("Cart is empty. Add items first.");
+        return;
+      }
+
       // ✅ PAYLOAD
       const payload = {
         tableNumber: activeTable.tableNumber,
         tableId: activeTable.tableId,
-        items: cartItems
+        items: cartItems,
       };
+
+      // ✅ TOKEN FROM LOCAL STORAGE
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You must be logged in to place an order");
+        return;
+      }
 
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/orders/place`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // 🔥 add token here
         },
         body: JSON.stringify(payload)
       });
 
-      // ❗ safety check
       if (!res.ok) {
         const text = await res.text();
         console.error("Server error:", text);
-        alert("Order failed");
+        alert("Order failed. Try again.");
         return;
       }
 
       const data = await res.json();
 
       console.log("ORDER RESPONSE:", data);
-      alert("Order placed successfully");
+      alert("Order placed successfully!");
 
+      // ✅ CLEAR CART
       dispatch(clearCart());
 
+      // ✅ STORE ACTIVE ORDER ID FOR TRACKING
       localStorage.setItem("activeOrderId", data.order._id);
 
+      // ✅ NAVIGATE TO TRACK ORDER PAGE
       navigate("/track-order");
 
     } catch (error) {
       console.error("Place Order Error:", error);
+      alert("Something went wrong. Try again.");
     }
   };
 
