@@ -12,7 +12,6 @@ import {
   markOrderPaid,
   getUserOrders
 } from "../controllers/order.controller.js";
-import verifyToken from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
@@ -28,9 +27,9 @@ const router = express.Router();
 // router.put("/:id/mark-paid",markOrderPaid);
 // router.get("/user", verifyToken, getUserOrders);
 
-router.post("/place", verifyToken, placeOrder);
+router.post("/place",  placeOrder);
 
-router.get("/user", verifyToken, getUserOrders); 
+// router.get("/user", getUserOrders); 
 
 router.get("/", getAllOrders);
 router.get("/table/:tableNumber", getOrdersByTable);
