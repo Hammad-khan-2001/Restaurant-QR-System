@@ -5,14 +5,11 @@ const verifyToken = async (req, res, next) => {
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(' ')[1];
       console.log(token);
-      // const decoded = jwt.verify(
-      //   token,
-      //   '5ee5ccd49bc212e3ce9f4b67b63ab981433cccfbe60f7dbf92b22b87116d3ea73ccf4fb6afbf0e73f90772f7a838156006d5d1faec38da9314a20484a639cd6c'
-      // );
       const decoded = jwt.verify(
         token,
         '5ee5ccd49bc212e3ce9f4b67b63ab981433cccfbe60f7dbf92b22b87116d3ea73ccf4fb6afbf0e73f90772f7a838156006d5d1faec38da9314a20484a639cd6c'
       );
+
       console.log(decoded);
       const userData = await User.findById(decoded.id).select('-passwordHash')
       console.log(userData)

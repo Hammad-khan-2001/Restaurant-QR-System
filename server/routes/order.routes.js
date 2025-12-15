@@ -10,7 +10,6 @@ import {
   getOrderById,
   setPaymentMethod,
   markOrderPaid,
-  getUserOrders
 } from "../controllers/order.controller.js";
 
 const router = express.Router();
