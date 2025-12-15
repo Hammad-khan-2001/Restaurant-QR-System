@@ -8,13 +8,14 @@ export const addMenuItem = async (req, res) => {
 
     const { name, price, category, inStock } = req.body;
 
-    let img = null;
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "menu-items"
-      });
-      img = result.secure_url;
-    }
+    // let img = null;
+    // if (req.file) {
+    //   const result = await cloudinary.uploader.upload(req.file.path, {
+    //     folder: "menu-items"
+    //   });
+    //   img = result.secure_url;
+    // }
+    let img = req.file ? req.file.path : null;
 
     const dish = await Menu.create({
       name,
@@ -101,12 +102,15 @@ export const updateMenuItem = async (req, res) => {
 
     const updateData = { ...req.body };
 
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "menu_items",
-      });
+    // if (req.file) {
+    //   const result = await cloudinary.uploader.upload(req.file.path, {
+    //     folder: "menu_items",
+    //   });
 
-      updateData.img = result.secure_url; // Save cloud URL
+    //   updateData.img = result.secure_url; // Save cloud URL
+    // }
+    if (req.file) {
+      updateData.img = req.file.path; // Already Cloudinary URL
     }
 
     const updated = await Menu.findByIdAndUpdate(id, updateData, {
