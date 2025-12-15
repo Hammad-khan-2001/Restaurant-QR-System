@@ -389,7 +389,7 @@ const Orders = () => {
   // ================= FETCH ORDERS =================
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("/api/v1/orders");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/orders`);
       // setOrders(res.data || []);
       setOrders(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
@@ -411,7 +411,7 @@ const Orders = () => {
   // ================= UPDATE STATUS / CANCEL =================
   const updateStatus = async (id, newStatus) => {
     try {
-      await axios.put(`/api/v1/orders/status/${id}`, { status: newStatus });
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/orders/status/${id}`, { status: newStatus });
       fetchOrders();
     } catch (err) {
       console.error("Update Status Error:", err);
