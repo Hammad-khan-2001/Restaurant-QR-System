@@ -68,7 +68,7 @@ const Navbar = () => {
             <Link to="/cart" className="relative flex items-center hover:text-[#f7c97e] transition">
               <FiShoppingCart size={28} />
               <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-black text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full">
-               {cartCount}
+                {cartCount}
               </span>
             </Link>
 
@@ -111,7 +111,7 @@ const Navbar = () => {
             <Link to="/cart" className="relative mr-1">
               <FiShoppingCart size={24} />
               <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-black text-[11px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                3
+                {cartCount}
               </span>
             </Link>
 

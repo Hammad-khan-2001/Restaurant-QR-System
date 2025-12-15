@@ -349,7 +349,7 @@ const TrackOrder = () => {
                                         {item.name} × {item.quantity}
                                     </span>
                                     <span>
-                                        ₹{(item.price * item.quantity).toFixed(2)}
+                                        ₹{((Number(item.price) || 0) * (Number(item.quantity) || 0)).toFixed(2)}
                                     </span>
                                 </li>
                             ))}
@@ -357,7 +357,7 @@ const TrackOrder = () => {
 
                         <div className="border-t border-white/10 mt-4 pt-4 flex justify-between text-lg font-bold text-yellow-400">
                             <span>Total</span>
-                            <span>₹{order.totalAmount.toFixed(2)}</span>
+                            <span>₹{Number(order.totalAmount || 0).toFixed(2)}</span>
                         </div>
                     </CardContent>
                 </Card>
