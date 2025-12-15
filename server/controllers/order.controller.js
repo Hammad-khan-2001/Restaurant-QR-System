@@ -224,12 +224,12 @@ export const markOrderPaid = async (req, res) => {
 // Get Orders Of User
 
 export const getUserOrders = async (req, res) => {
-  try {
-    // req.user._id should come from verifyUser middleware
-    const orders = await Order.find({ userId: req.user._id }).sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: orders });
-  } catch (err) {
-    console.error("Fetch User Orders Error:", err);
-    res.status(500).json({ success: false, message: "Server Error" });
-  }
+    try {
+        const userId = req.user.id; // verifyToken middleware should set req.user
+        const orders = await Order.find({ user: userId }).sort({ createdAt: -1 });
+        res.status(200).json({ data: orders });
+    } catch (err) {
+        console.error("Get User Orders Error:", err);
+        res.status(500).json({ message: "Server error" });
+    }
 };
