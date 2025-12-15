@@ -1,28 +1,28 @@
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
-// export const generateAccessToken = (payload) => {
-//   return jwt.sign(
-//     payload,
-//     '5ee5ccd49bc212e3ce9f4b67b63ab981433cccfbe60f7dbf92b22b87116d3ea73ccf4fb6afbf0e73f90772f7a838156006d5d1faec38da9314a20484a639cd6c',
-//     { expiresIn: '15m' }
-//   );
-// };
+export const generateAccessToken = (payload) => {
+  return jwt.sign(
+    payload,
+    '5ee5ccd49bc212e3ce9f4b67b63ab981433cccfbe60f7dbf92b22b87116d3ea73ccf4fb6afbf0e73f90772f7a838156006d5d1faec38da9314a20484a639cd6c',
+    { expiresIn: '15m' }
+  );
+};
 
-// export const generateRefreshToken = (payload) => {
-//   return jwt.sign(
-//     payload,
-//     '5ee5ccd49bc212e3ce9f4b67b63ab981433cccfbe60f7dbf92b22b87116d3ea73ccf4fb6afbf0e73f90772f7a838156006d5d1faec38da9314a20484a639cd6c',
-//     { expiresIn: '7d' }
-//   );
-// };
+export const generateRefreshToken = (payload) => {
+  return jwt.sign(
+    payload,
+    '5ee5ccd49bc212e3ce9f4b67b63ab981433cccfbe60f7dbf92b22b87116d3ea73ccf4fb6afbf0e73f90772f7a838156006d5d1faec38da9314a20484a639cd6c',
+    { expiresIn: '7d' }
+  );
+};
 
 
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+// const JWT_SECRET = process.env.JWT_SECRET;
 
-export const generateAccessToken = (payload) =>
-  jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+// export const generateAccessToken = (payload) =>
+//   jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
 
-export const generateRefreshToken = (payload) =>
-  jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+// export const generateRefreshToken = (payload) =>
+//   jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
