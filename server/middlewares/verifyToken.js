@@ -16,7 +16,7 @@ const verifyToken = async (req, res, next) => {
       console.log(decoded);
       const userData = await User.findById(decoded.id).select('-passwordHash')
       console.log(userData)
-      req.user = user; 
+      req.user = userData; 
       next()
     }
   } catch (error) {
