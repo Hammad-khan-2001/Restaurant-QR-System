@@ -16,7 +16,7 @@ import verifyToken  from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-router.post("/place", placeOrder);
+router.post("/place", verifyToken, placeOrder);
 router.get("/", getAllOrders);
 router.get("/table/:tableNumber", getOrdersByTable);
 router.put("/status/:id", updateOrderStatus);

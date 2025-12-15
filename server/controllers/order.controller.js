@@ -20,6 +20,7 @@ export const placeOrder = async (req, res) => {
         );
 
         const newOrder = await Order.create({
+            user: req.user._id,
             tableNumber,
             tableId,
             items,
