@@ -7,7 +7,7 @@ import Table from "../models/table.js";
 
 export const placeOrder = async (req, res) => {
     try {
-      
+
         const { tableNumber, tableId, items } = req.body;
 
 
@@ -21,6 +21,7 @@ export const placeOrder = async (req, res) => {
         );
 
         const newOrder = await Order.create({
+            user: req.user._id,
             tableNumber,
             tableId,
             items,
@@ -226,7 +227,7 @@ export const markOrderPaid = async (req, res) => {
 
 export const getUserOrders = async (req, res) => {
     try {
-        const userId = req.user.id; 
+        const userId = req.user.id;
         const orders = await Order.find({ user: userId }).sort({ createdAt: -1 });
         res.status(200).json({ data: orders });
     } catch (err) {
