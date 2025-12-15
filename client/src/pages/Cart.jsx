@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // Format currency
 const formatCurrency = (amount) =>
@@ -167,23 +168,17 @@ const Cart = () => {
         return;
       }
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/orders/place`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` // 🔥 add token here
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        console.error("Server error:", text);
-        alert("Order failed. Try again.");
-        return;
-      }
-
-      const data = await res.json();
+      // ✅ AXIOS POST
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/orders/place`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // 🔥 add token here
+          },
+        }
+      );
 
       console.log("ORDER RESPONSE:", data);
       alert("Order placed successfully!");
@@ -198,8 +193,8 @@ const Cart = () => {
       navigate("/track-order");
 
     } catch (error) {
-      console.error("Place Order Error:", error);
-      alert("Something went wrong. Try again.");
+      console.error("Place Order Error:", error.response?.data || error.message);
+      alert("Order failed. Try again.");
     }
   };
 
