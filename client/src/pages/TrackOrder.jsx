@@ -225,8 +225,8 @@ const TrackOrder = () => {
         }
 
         try {
-            const res = await axios.get(`/api/v1/orders/${orderId}`);
-            setOrder(res.data);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/orders/${orderId}`);
+            setOrder(res.data.order);
         } catch (err) {
             console.error("Fetch Order Error:", err);
         } finally {
@@ -239,7 +239,7 @@ const TrackOrder = () => {
         try {
             setPayLoading(true);
 
-            await axios.put(`/api/v1/orders/status/${orderId}`, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/orders/status/${orderId}`, {
                 status: "completed",
                 paymentMode: mode,
             });
