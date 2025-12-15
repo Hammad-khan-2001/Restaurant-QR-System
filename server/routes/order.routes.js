@@ -9,8 +9,10 @@ import {
   getLiveOrders,
   getOrderById,
   setPaymentMethod,
-  markOrderPaid
+  markOrderPaid,
+  getUserOrders
 } from "../controllers/order.controller.js";
+import verifyToken  from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
@@ -24,7 +26,7 @@ router.get("/live", getLiveOrders);
 router.get("/:id", getOrderById);
 router.put("/:id/payment-method",setPaymentMethod);
 router.put("/:id/mark-paid",markOrderPaid);
-
+router.get("/user", verifyToken, getUserOrders);
 
 
 export default router;

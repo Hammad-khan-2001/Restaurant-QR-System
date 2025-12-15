@@ -218,3 +218,18 @@ export const markOrderPaid = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
+
+
+
+// Get Orders Of User
+
+export const getUserOrders = async (req, res) => {
+  try {
+    // req.user._id should come from verifyUser middleware
+    const orders = await Order.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: orders });
+  } catch (err) {
+    console.error("Fetch User Orders Error:", err);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
