@@ -226,7 +226,7 @@ const TrackOrder = () => {
 
         try {
             const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/orders/${orderId}`);
-            setOrder(res.data.order);
+            setOrder(res.data);
         } catch (err) {
             console.error("Fetch Order Error:", err);
         } finally {
