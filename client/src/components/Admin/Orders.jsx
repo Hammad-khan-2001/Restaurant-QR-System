@@ -420,7 +420,7 @@ const Orders = () => {
 
   const cancelOrder = async (id) => {
     try {
-      await axios.put(`/api/v1/orders/cancel/${id}`);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/orders/cancel/${id}`);
       fetchOrders();
     } catch (err) {
       console.error("Cancel Order Error:", err);
