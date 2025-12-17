@@ -3,16 +3,16 @@ import nodemailer from "nodemailer";
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "riteshpatidar088@gmail.com",      // your gmail
-    pass: 'gaeejvfameleukmu'       // app password
+    user: "",      // your gmail
+    pass: ""       // app password
   }
 });
 
 export const sendWelcomeMail = async (to, name) => {
   try {
     await transporter.sendMail({
-      from: "riteshpatidar088@gmail.com",
-      to: "onea4427@gmail.com",
+      from: "",
+      to: "",
       subject: "Thank you for registering on ScanBite 🎉",
       html: `
       <div style="font-family: Arial;">
