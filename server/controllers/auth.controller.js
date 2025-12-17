@@ -1,7 +1,8 @@
 import User from '../models/userModel.js';
+import {sendWelcomeMail} from '../utils/sendMail.js'
 // import bcrypt from 'bcrypt';
 import bcrypt from "bcryptjs";
-import { generateAccessToken , generateRefreshToken } from '../utils/jwt.js';
+import { generateAccessToken, generateRefreshToken } from '../utils/jwt.js';
 
 export const register = async (req, res) => {
   try {
@@ -19,12 +20,18 @@ export const register = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, 12);
     const data = { name, email, phone, passwordHash };
     const newUser = await User.create(data);
+
+    // ✅ SEND MAIL AFTER SUCCESS
+    sendWelcomeMail(newUser.email, newUser.name)
+      .catch(err => console.log("Mail Error:", err.message));
+
+
     res.status(201).json({
       messsage: 'success',
       data: newUser,
     });
   } catch (error) {
-    res.status(500).json({ 
+    res.status(500).json({
       message: error.message,
     });
   }
@@ -42,14 +49,14 @@ export const login = async (req, res) => {
     console.log(user);
 
     if (!user) {
-       return res.status(400).json({
+      return res.status(400).json({
         message: `There is no account with ${email} , Please create an account and try again`,
       });
     }
     const isPasswordMatch = await bcrypt.compare(password, user.passwordHash);
     //  console.log(isPasswordMatch)
-     if (!isPasswordMatch) {
-       return res.status(400).json({
+    if (!isPasswordMatch) {
+      return res.status(400).json({
         message: "Invalid Password",
       });
     }
@@ -82,103 +89,3 @@ export const login = async (req, res) => {
 
 
 
-
-
-
-// import User from '../models/userModel.js';
-// // import bcrypt from 'bcrypt';
-// import bcrypt from "bcryptjs";
-// import { generateAccessToken , generateRefreshToken } from '../utils/jwt.js';
-
-// export const register = async (req, res) => {
-//   try {
-//     const { name, email, password, phone } = req.body;
-
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.status(400).json({
-//         message: "You are already registered, please login",
-//       });
-//     }
-
-//     const passwordHash = await bcrypt.hash(password, 12);
-
-//     const user = await User.create({
-//       name,
-//       email,
-//       phone,
-//       passwordHash,
-//     });
-
-//     const accessToken = generateAccessToken({
-//       id: user._id,
-//       role: user.role,
-//     });
-
-//     const safeUser = {
-//       _id: user._id,
-//       name: user.name,
-//       email: user.email,
-//       phone: user.phone,
-//       role: user.role,
-//     };
-
-//     res.status(201).json({
-//       message: "Registration successful",
-//       data: safeUser,
-//       accessToken,
-//     });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-
-
-
-// export const login = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       return res.status(400).json({
-//         message: "Invalid email or password",
-//       });
-//     }
-
-//     const isMatch = await bcrypt.compare(password, user.passwordHash);
-//     if (!isMatch) {
-//       return res.status(400).json({
-//         message: "Invalid email or password",
-//       });
-//     }
-
-//     const accessToken = generateAccessToken({
-//       id: user._id,
-//       role: user.role,
-//     });
-
-//     const refreshToken = generateRefreshToken({
-//       id: user._id,
-//       role: user.role,
-//     });
-
-//     const safeUser = {
-//       _id: user._id,
-//       name: user.name,
-//       email: user.email,
-//       phone: user.phone,
-//       role: user.role,
-//     };
-
-//     res.status(200).json({
-//       message: "Login successful",
-//       data: safeUser,
-//       accessToken,
-//       refreshToken,
-//     });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
