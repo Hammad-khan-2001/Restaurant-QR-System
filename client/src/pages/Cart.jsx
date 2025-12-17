@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import CustomAlert from "../components/CustomAlert"
 
 
 
