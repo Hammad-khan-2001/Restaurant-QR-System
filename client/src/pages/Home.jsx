@@ -166,7 +166,6 @@ import About from "../components/About";
 import '../index.css'
 import Features from "../components/Features";
 import Footer from "../components/Footer"
-import LoginSuccessAlert from "../components/LoginSuccessful";
 
 const desktopImages = [
   "https://plus.unsplash.com/premium_photo-1736167753494-13b26720e9fe?q=80&w=870&auto=format&fit=crop",
@@ -189,7 +188,6 @@ export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const [searchParams] = useSearchParams();
   const [table, setTable] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
   const sliderRef = useRef();
 
   const location = useLocation();
@@ -327,19 +325,10 @@ export default function Home() {
   }, []);
 
 
-  useEffect(() => {
-    if (location.state?.showLoginSuccess) {
-      setShowAlert(true);
-    }
-  }, [location.state]);
 
 
   return (
     <div>
-      <LoginSuccessAlert
-        show={showAlert}
-        onClose={() => setShowAlert(false)}
-      />
 
       {/* HERO */}
       <section className="relative w-full h-screen overflow-hidden min-h-[500px]">
