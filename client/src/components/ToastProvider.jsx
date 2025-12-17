@@ -6,11 +6,21 @@ const ToastProvider = () => {
             position="top-center"
             gutter={12}
             toastOptions={{
-                duration: 5000,
+                duration: 2000, // 2 seconds
                 style: {
-                    padding: "0",
-                    background: "transparent",
-                    boxShadow: "none",
+                    background: "#16a34a", // professional dark green
+                    color: "#fff",
+                    padding: "12px 20px",
+                    fontWeight: "500",
+                    fontSize: "16px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                },
+                success: {
+                    iconTheme: {
+                        primary: "#fff",
+                        secondary: "#16a34a",
+                    },
                 },
             }}
         />
@@ -18,3 +28,4 @@ const ToastProvider = () => {
 };
 
 export default ToastProvider;
+

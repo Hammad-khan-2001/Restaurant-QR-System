@@ -141,11 +141,8 @@ const Cart = () => {
       // ✅ Clear cart + save orderId
       dispatch(clearCart());
       localStorage.setItem("activeOrderId", data.order._id);
-
-      // ✅ Redirect after toast duration
-      setTimeout(() => {
-        navigate("/track-order");
-      }, 2000);
+      
+      navigate("/track-order");
 
 
     } catch (error) {
