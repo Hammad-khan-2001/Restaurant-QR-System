@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import SuccessToast from "../components/SuccessToast";
 
 // Format currency
 const formatCurrency = (amount) =>
@@ -89,6 +90,10 @@ const Cart = () => {
 
 
   const handlePlaceOrder = async () => {
+    const confirmOrder = window.confirm(
+      "Are you sure you want to place this order?"
+    );
+    if (!confirmOrder) return;
     try {
       // ✅ TABLE INFO FROM LOCAL STORAGE (QR SE AAYA)
       const activeTable = JSON.parse(localStorage.getItem("activeTable"));
@@ -123,79 +128,33 @@ const Cart = () => {
 
       const data = await res.json();
 
-      console.log("ORDER RESPONSE:", data);
-      alert("Order placed successfully");
+      // console.log("ORDER RESPONSE:", data);
+      // alert("Order placed successfully");
 
-      dispatch(clearCart());
+      // dispatch(clearCart());
 
-      localStorage.setItem("activeOrderId", data.order._id);
+      // localStorage.setItem("activeOrderId", data.order._id);
 
-      navigate("/track-order");
+      // navigate("/track-order");
+      // ✅ Show success toast
+      toast.dismiss();
+      toast.custom(
+        (t) => <SuccessToast t={t} message="Order placed successfully" />,
+        { duration: 2500 }
+      );
+
+      // ✅ Wait toast duration before clearing cart and redirect
+      setTimeout(() => {
+        dispatch(clearCart()); // Now cart clears after toast
+        localStorage.setItem("activeOrderId", data.order._id);
+        navigate("/track-order");
+      }, 2500); // matches toast duration
 
     } catch (error) {
       console.error("Place Order Error:", error);
     }
   };
 
-
-  // const handlePlaceOrder = async () => {
-  //   try {
-  //     // ✅ TABLE INFO FROM LOCAL STORAGE (QR SE AAYA)
-  //     const activeTable = JSON.parse(localStorage.getItem("activeTable"));
-
-  //     if (!activeTable) {
-  //       alert("Please scan table QR first");
-  //       return;
-  //     }
-
-  //     if (!cartItems || cartItems.length === 0) {
-  //       alert("Cart is empty. Add items first.");
-  //       return;
-  //     }
-
-  //     // ✅ PAYLOAD
-  //     const payload = {
-  //       tableNumber: activeTable.tableNumber,
-  //       tableId: activeTable.tableId,
-  //       items: cartItems,
-  //     };
-
-  //     // ✅ TOKEN FROM LOCAL STORAGE
-  //     const token = localStorage.getItem("token");
-  //     if (!token) {
-  //       alert("You must be logged in to place an order");
-  //       return;
-  //     }
-
-  //     // ✅ AXIOS POST
-  //     const { data } = await axios.post(
-  //       `${import.meta.env.VITE_API_URL}/api/v1/orders/place`,
-  //       payload,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`, // 🔥 add token here
-  //         },
-  //       }
-  //     );
-
-  //     console.log("ORDER RESPONSE:", data);
-  //     alert("Order placed successfully!");
-
-  //     // ✅ CLEAR CART
-  //     dispatch(clearCart());
-
-  //     // ✅ STORE ACTIVE ORDER ID FOR TRACKING
-  //     localStorage.setItem("activeOrderId", data.order._id);
-
-  //     // ✅ NAVIGATE TO TRACK ORDER PAGE
-  //     navigate("/track-order");
-
-  //   } catch (error) {
-  //     console.error("Place Order Error:", error.response?.data || error.message);
-  //     alert("Order failed. Try again.");
-  //   }
-  // };
 
 
   return (
