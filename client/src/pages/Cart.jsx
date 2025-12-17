@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
@@ -126,14 +126,19 @@ const Cart = () => {
 
       const data = await res.json();
 
-      console.log("ORDER RESPONSE:", data);
-      alert("Order placed successfully");
+      // console.log("ORDER RESPONSE:", data);
+      // alert("Order placed successfully");
 
+      // dispatch(clearCart());
+
+      // localStorage.setItem("activeOrderId", data.order._id);
+
+      // navigate("/track-order");
+
+      // Order successful 
+      setShowAlert(true);
       dispatch(clearCart());
-
       localStorage.setItem("activeOrderId", data.order._id);
-
-      navigate("/track-order");
 
 
     } catch (error) {
@@ -194,6 +199,14 @@ const Cart = () => {
           </>
         )}
       </div>
+      <CustomAlert
+        show={showAlert}
+        message="Order placed successfully"
+        onClose={() => {
+          setShowAlert(false);
+          navigate("/track-order");
+        }}
+      />
     </div>
   );
 };
