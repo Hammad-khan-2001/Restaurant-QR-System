@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
@@ -28,7 +28,7 @@ const App = () => {
       <div style={{ paddingTop: !shouldHideNavbar ? "64px" : "0px" }}>
         <Routes>
           {/* Public / Open Routes */}
-          <Route path="/" element={<OpenRoutes><Home /></OpenRoutes>} />
+          {/* <Route path="/" element={<OpenRoutes><Home /></OpenRoutes>} /> */}
           <Route path="/login" element={<OpenRoutes><Login /></OpenRoutes>} />
           <Route path="/register" element={<OpenRoutes><Register /></OpenRoutes>} />
 
@@ -39,13 +39,16 @@ const App = () => {
           <Route path="/contact" element={<ProtectRoutes><Contact /></ProtectRoutes>} />
           <Route path="/track-order" element={<ProtectRoutes><TrackOrder /></ProtectRoutes>} />
 
+          {/* Default Routes */}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+
           {/* Admin Routes */}
           <Route path="/admin/*" element={<ProtectRoutes><AdminPanel /></ProtectRoutes>}>
             <Route index element={<AdminOverview />} />
-            <Route path="tables" element={<Tables />} />         
-            <Route path="menu" element={<AdminMenu />} />       
-            <Route path="orders" element={<Orders />} />       
-            <Route path="payment" element={<Payment />} />      
+            <Route path="tables" element={<Tables />} />
+            <Route path="menu" element={<AdminMenu />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="payment" element={<Payment />} />
           </Route>
         </Routes>
       </div>

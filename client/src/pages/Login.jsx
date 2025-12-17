@@ -134,7 +134,7 @@ export default function Login() {
       const res = await dispatch(login({ email, password })).unwrap();
       localStorage.setItem("token", res.accessToken);
       setShowSuccess(true);
-      navigate("/home");
+      navigate("/home", { replace: true });
 
     } catch (err) {
       console.log("Login failed", err);

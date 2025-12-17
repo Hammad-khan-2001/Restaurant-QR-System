@@ -157,9 +157,9 @@ const Navbar = () => {
         )}
 
         <div className="mt-8 flex flex-col text-center bg-[#0a0600]">
-          <Link onClick={() => setOpen(false)} to="/" className="py-4 text-lg border-b border-white/10 hover:text-[#D4AF37]">Home</Link>
-          <Link onClick={() => setOpen(false)} to="/track-order" className="py-4 text-lg border-b border-white/10 hover:text-[#D4AF37]">Orders</Link>
+          <Link onClick={() => setOpen(false)} to="/home" className="py-4 text-lg border-b border-white/10 hover:text-[#D4AF37]">Home</Link>
           <Link onClick={() => setOpen(false)} to="/menu" className="py-4 text-lg border-b border-white/10 hover:text-[#D4AF37]">Menu</Link>
+          <Link onClick={() => setOpen(false)} to="/track-order" className="py-4 text-lg border-b border-white/10 hover:text-[#D4AF37]">Orders</Link>
           <Link onClick={() => setOpen(false)} to="/contact" className="py-4 text-lg border-b border-white/10 hover:text-[#D4AF37]">Contact</Link>
 
           {token && (
