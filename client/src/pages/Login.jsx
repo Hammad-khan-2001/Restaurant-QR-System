@@ -107,6 +107,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../Redux/authSlice";
 import { FaUserAlt } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 
 export default function Login() {
@@ -133,11 +134,12 @@ export default function Login() {
     try {
       const res = await dispatch(login({ email, password })).unwrap();
       localStorage.setItem("token", res.accessToken);
-      setShowSuccess(true);
+      toast.success("Logged in successfully");
       navigate("/home", { replace: true });
 
     } catch (err) {
       console.log("Login failed", err);
+      toast.error("Invalid email or password");
     }
   };
 

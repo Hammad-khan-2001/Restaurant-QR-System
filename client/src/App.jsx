@@ -16,6 +16,7 @@ import Orders from './components/Admin/Orders';
 import Payment from './components/Admin/Payment';
 import Navbar from './components/Navbar';
 import TrackOrder from './pages/TrackOrder';
+import ToastProvider from './components/ToastProvider';
 
 const App = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const App = () => {
 
   return (
     <>
+      <ToastProvider />
       {!shouldHideNavbar && <Navbar />}
       <div style={{ paddingTop: !shouldHideNavbar ? "64px" : "0px" }}>
         <Routes>
