@@ -140,7 +140,7 @@ export default function Login() {
           t={t}
           message="Logged in successfully"
         />
-      ));
+      ), { duration: 3000 });
       navigate("/home", { replace: true });
 
     } catch (err) {
