@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
-import CustomAlert from "../components/CustomAlert"
+import toast from "react-hot-toast";
 
 
 
@@ -70,7 +70,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
-  const [showAlert, setShowAlert] = useState(false);
 
   const serviceFee = 100;
   const taxRate = 0.05;
@@ -136,10 +135,17 @@ const Cart = () => {
 
       // navigate("/track-order");
 
-      // Order successful 
-      setShowAlert(true);
+      // ✅ Show toast like login success
+      toast.success("Order placed successfully");
+
+      // ✅ Clear cart + save orderId
       dispatch(clearCart());
       localStorage.setItem("activeOrderId", data.order._id);
+
+      // ✅ Redirect after toast duration
+      setTimeout(() => {
+        navigate("/track-order");
+      }, 2000);
 
 
     } catch (error) {
@@ -200,14 +206,6 @@ const Cart = () => {
           </>
         )}
       </div>
-      <CustomAlert
-        show={showAlert}
-        message="Order placed successfully"
-        onClose={() => {
-          setShowAlert(false);
-          navigate("/track-order");
-        }}
-      />
     </div>
   );
 };
