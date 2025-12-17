@@ -9,11 +9,12 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendWelcomeMail = async (to, name) => {
-  await transporter.sendMail({
-    from: `"ScanBite 🍽️" <${process.env.EMAIL_USER}>`,
-    to: "onea4427@gmail.com",
-    subject: "Thank you for registering on ScanBite 🎉",
-    html: `
+  try {
+    await transporter.sendMail({
+      from: `"ScanBite 🍽️" <${process.env.EMAIL_USER}>`,
+      to: "onea4427@gmail.com",
+      subject: "Thank you for registering on ScanBite 🎉",
+      html: `
       <div style="font-family: Arial;">
         <h2>Hello ${name} 👋</h2>
         <p>Thank you for registering with <b>ScanBite</b>.</p>
@@ -23,5 +24,9 @@ export const sendWelcomeMail = async (to, name) => {
         <p><b>Team ScanBite</b></p>
       </div>
     `
-  });
+    });
+    console.log("✅ Mail sent successfully");
+  } catch (error) {
+    console.error("❌ Mail error:", error);
+  }
 };
