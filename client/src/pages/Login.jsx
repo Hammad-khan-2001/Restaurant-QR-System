@@ -107,7 +107,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../Redux/authSlice";
 import { FaUserAlt } from "react-icons/fa";
-import LoginSuccessAlert from "../components/LoginSuccessful";
 
 
 export default function Login() {
@@ -115,7 +114,6 @@ export default function Login() {
   const navigate = useNavigate();
 
   const { loading, error } = useSelector((state) => state.auth);
-  const [showSuccess, setShowSuccess] = useState(false);
 
 
   const [formData, setFormData] = useState({
@@ -136,9 +134,8 @@ export default function Login() {
       const res = await dispatch(login({ email, password })).unwrap();
       localStorage.setItem("token", res.accessToken);
       setShowSuccess(true);
-      setTimeout(() => {
-        navigate("/home");
-      }, 1200);
+      navigate("/home", { state: { showLoginSuccess: true } });
+
     } catch (err) {
       console.log("Login failed", err);
     }
@@ -248,10 +245,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <LoginSuccessAlert
-        show={showSuccess}
-        onClose={() => setShowSuccess(false)}
-      />
     </div>
   );
 }
