@@ -18,3 +18,12 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
 }
+
+@keyframes progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.animate-progress {
+  animation: progress 5s linear forwards;
+}
