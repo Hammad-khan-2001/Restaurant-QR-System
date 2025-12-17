@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Trash2, Minus, Plus, Utensils, ClipboardCheck } from "lucide-react";
 import { removeFromCart, updateQuantity, clearCart } from "../Redux/cartSlice";
 import { useNavigate } from "react-router-dom";
-import SuccessToast from "../components/SuccessToast";
+import CustomAlert from "./components/CustomAlert"
+
 
 // Format currency
 const formatCurrency = (amount) =>
@@ -68,6 +69,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
+  const [showAlert, setShowAlert] = useState(false);
 
   const serviceFee = 100;
   const taxRate = 0.05;
@@ -90,10 +92,6 @@ const Cart = () => {
 
 
   const handlePlaceOrder = async () => {
-    const confirmOrder = window.confirm(
-      "Are you sure you want to place this order?"
-    );
-    if (!confirmOrder) return;
     try {
       // ✅ TABLE INFO FROM LOCAL STORAGE (QR SE AAYA)
       const activeTable = JSON.parse(localStorage.getItem("activeTable"));
@@ -136,19 +134,12 @@ const Cart = () => {
       // localStorage.setItem("activeOrderId", data.order._id);
 
       // navigate("/track-order");
-      // ✅ Show success toast
-      toast.dismiss();
-      toast.custom(
-        (t) => <SuccessToast t={t} message="Order placed successfully" />,
-        { duration: 2500 }
-      );
 
-      // ✅ Wait toast duration before clearing cart and redirect
-      setTimeout(() => {
-        dispatch(clearCart()); // Now cart clears after toast
-        localStorage.setItem("activeOrderId", data.order._id);
-        navigate("/track-order");
-      }, 2500); // matches toast duration
+      // Order successful
+      setShowAlert(true);
+      dispatch(clearCart());
+      localStorage.setItem("activeOrderId", data.order._id);
+
 
     } catch (error) {
       console.error("Place Order Error:", error);
@@ -208,6 +199,14 @@ const Cart = () => {
           </>
         )}
       </div>
+      <CustomAlert
+        show={showAlert}
+        message="Order placed successfully"
+        onClose={() => {
+          setShowAlert(false);
+          navigate("/track-order");
+        }}
+      />
     </div>
   );
 };
