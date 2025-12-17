@@ -108,6 +108,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../Redux/authSlice";
 import { FaUserAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import SuccessToast from "../components/SuccessToast";
 
 
 export default function Login() {
@@ -134,7 +135,10 @@ export default function Login() {
     try {
       const res = await dispatch(login({ email, password })).unwrap();
       localStorage.setItem("token", res.accessToken);
-      toast.success("Logged in successfully");
+      <SuccessToast
+        t={t}
+        message="Logged in successfully"
+      />
       navigate("/home", { replace: true });
 
     } catch (err) {
