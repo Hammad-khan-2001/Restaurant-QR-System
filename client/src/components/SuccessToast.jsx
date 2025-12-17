@@ -4,11 +4,11 @@ import { CheckCircle2, X } from "lucide-react";
 const SuccessToast = ({ t, message }) => {
   return (
     <div
-      className="bg-[#0f5132] text-white rounded-xl shadow-lg w-[340px] overflow-hidden"
+      className="bg-[#013b03] text-white rounded-xl shadow-lg w-[340px] overflow-hidden"
     >
       {/* CONTENT */}
       <div className="flex items-center gap-3 px-4 py-3">
-        <CheckCircle2 className="w-6 h-6 text-[#9ae6b4]" />
+        <CheckCircle2 className="w-6 h-6 text-[#105c13]" />
 
         <p className="text-sm font-medium flex-1 tracking-wide">
           {message}
@@ -20,9 +20,9 @@ const SuccessToast = ({ t, message }) => {
       </div>
 
       {/* PROGRESS BAR */}
-      <div className="h-[3px] bg-[#14532d]">
+      <div className="h-[3px] bg-[#013b03]">
         <div
-          className="h-full bg-[#4ade80] animate-toast-progress"
+          className="h-full bg-[#028507] animate-toast-progress"
           style={{ animationDuration: "3000ms" }}
         />
       </div>
