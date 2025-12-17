@@ -4,14 +4,14 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "riteshpatidar088@gmail.com",      // your gmail
-    pass: 'gaeejvfameleukmu'       // app password
+    pass: 'gaee jvfa mele ukmu'       // app password
   }
 });
 
 export const sendWelcomeMail = async (to, name) => {
   try {
     await transporter.sendMail({
-      from: `"ScanBite 🍽️" <${process.env.EMAIL_USER}>`,
+      from: "riteshpatidar088@gmail.com",
       to: "onea4427@gmail.com",
       subject: "Thank you for registering on ScanBite 🎉",
       html: `
