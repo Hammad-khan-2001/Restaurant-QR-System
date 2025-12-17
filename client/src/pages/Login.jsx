@@ -135,10 +135,12 @@ export default function Login() {
     try {
       const res = await dispatch(login({ email, password })).unwrap();
       localStorage.setItem("token", res.accessToken);
-      <SuccessToast
-        t={t}
-        message="Logged in successfully"
-      />
+      toast.custom((t) => (
+        <SuccessToast
+          t={t}
+          message="Logged in successfully"
+        />
+      ));
       navigate("/home", { replace: true });
 
     } catch (err) {
