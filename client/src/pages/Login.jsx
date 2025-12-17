@@ -143,7 +143,6 @@ export default function Login() {
 
     } catch (err) {
       console.log("Login failed", err);
-      toast.error("Invalid email or password");
     }
   };
 
