@@ -49,8 +49,7 @@ export const createTable = async (req, res) => {
 
 export const getTableBySlug = async (req, res, next) => {
   try {
-    // const { slug } = req.params;
-     const slug = req.params.slug || req.query.qr;
+     const { slug } = req.params;
 
     // 🔥 isActive condition hata do
     const table = await Table.findOne({ qrSlug: slug });
