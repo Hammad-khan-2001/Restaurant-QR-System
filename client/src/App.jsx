@@ -42,7 +42,8 @@ const App = () => {
           <Route path="/track-order" element={<ProtectRoutes><TrackOrder /></ProtectRoutes>} />
 
           {/* Default Routes */}
-          <Route path="/" element={<Navigate to="/home" replace />} />
+          {/* <Route path="/" element={<Navigate to="/home" replace />} /> */}
+           <Route path="/" element={<Home />} />
 
           {/* Admin Routes */}
           <Route path="/admin/*" element={<ProtectRoutes><AdminPanel /></ProtectRoutes>}>
