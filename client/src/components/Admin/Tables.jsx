@@ -183,12 +183,12 @@ const Tables = () => {
   const [capacity, setCapacity] = useState("");
 
   // ============= IMPORTANT FIX =============
-  const api = axios.create({
-    baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  // const api = axios.create({
+    // baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
+    // headers: {
+      // Authorization: `Bearer ${localStorage.getItem("token")}`,
+    // },
+  // });
   // ==========================================
 
   const fetchTables = async () => {
