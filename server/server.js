@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./configs/db.js";
 import authRoutes from "./routes/auth.routes.js";
-import TableRoutes from './routes/table.routes.js'
+import tableRoutes from './routes/table.routes.js'
 import sessionRoutes from './routes/session.routes.js';
 import adminAuthRoutes from "./routes/admin.auth.routes.js";
 import menuRoutes from "./routes/menu.routes.js";
@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/v1/auth", authRoutes);
-app.use('/api/v1', TableRoutes);
+app.use('/api/v1', tableRoutes);
 app.use('/api/v1', sessionRoutes);
 app.use("/api/admin", adminAuthRoutes);
 app.use("/api/menu", menuRoutes);
